@@ -1,13 +1,14 @@
-namespace RepairIT.API.Repairing.Domain.Model;
+namespace RepairIT.API.Repairing.Domain.Models;
 
 public class Device
 {
-    public int id { get; set; }
-    public string name { get; set; }
-    public string description { get; set; }
-    public string imagePath { get; set; }
-    public string inventoryStatus { get; set; }
+    public int Id { get; set; }
+    public string name { get; set; } = null!;
+    public string description { get; set; } = null!;
+    public string imagePath { get; set; } = null!;
+    public string inventoryStatus { get; set; } = null!;
+
+    public int ClientId { get; set; }
     
-    
-    
+    public Client Client { get; set; } = null!;
 }
