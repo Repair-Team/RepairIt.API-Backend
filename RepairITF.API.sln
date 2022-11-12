@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairIT.API", "RepairIT.API\RepairIT.API.csproj", "{78F8BD43-6E8F-490F-9796-EBAFA65FAB91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairIT.API.Tests", "RepairIT.API.Tests\RepairIT.API.Tests.csproj", "{48FE62DA-D7A0-46E9-97B4-26554E39C75C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{78F8BD43-6E8F-490F-9796-EBAFA65FAB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78F8BD43-6E8F-490F-9796-EBAFA65FAB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78F8BD43-6E8F-490F-9796-EBAFA65FAB91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FE62DA-D7A0-46E9-97B4-26554E39C75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FE62DA-D7A0-46E9-97B4-26554E39C75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FE62DA-D7A0-46E9-97B4-26554E39C75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FE62DA-D7A0-46E9-97B4-26554E39C75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
