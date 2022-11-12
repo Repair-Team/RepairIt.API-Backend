@@ -12,7 +12,7 @@ namespace RepairIT.API.Repairing.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-[Produces(MediaTypeNames.Application.Json)]
+[Produces("application/json")]
 [SwaggerTag("Create, read, update and delete clients")]
 public class ClientsController: ControllerBase
 {
@@ -41,6 +41,20 @@ public class ClientsController: ControllerBase
         return resources;
     }
 
+    [HttpGet("{clientId}")]
+    [SwaggerOperation(
+        Summary = "Get Client from Clients table by ID",
+        Description = "Get existing client with the ID",
+        OperationId = "GetClient",
+        Tags = new[] { "Clients" }
+    )]
+    public async Task<ClientResource> GetClientById(int clientId)
+    {
+        var client = await _clientService.FindIdByAsync(clientId);
+        var resource = _mapper.Map<Client, ClientResource>(client);
+
+        return resource;
+    }
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create New Client",
