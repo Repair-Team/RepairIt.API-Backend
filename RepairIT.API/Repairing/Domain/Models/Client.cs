@@ -1,3 +1,5 @@
+
+
 namespace RepairIT.API.Repairing.Domain.Models;
 
 public class Client
@@ -13,5 +15,7 @@ public class Client
     public string Password { get; set; }
     
     
+    //Relationships
     
+    public List<Device> Devices { get; set; }
 }

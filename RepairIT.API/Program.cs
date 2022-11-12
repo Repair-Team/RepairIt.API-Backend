@@ -35,6 +35,11 @@ builder.Services.AddSwaggerGen(options =>
 
 //Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("repairitt");
+});
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseMySQL(connectionString)
         .LogTo(Console.WriteLine, LogLevel.Information)
@@ -47,8 +52,22 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 //Dependency Injections
 
+//Clients
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
+
+//Technicians
+builder.Services.AddScoped<ITechnicianRepository, TechnicianRepository>();
+builder.Services.AddScoped<ITechnicianService, TechnicianService>();
+
+//Devices
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
+
+//Reports
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IReportService, ReportService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //AutoMapper Configuration

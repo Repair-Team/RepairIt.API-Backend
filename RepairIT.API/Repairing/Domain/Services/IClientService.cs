@@ -7,6 +7,8 @@ public interface IClientService
 {
     Task<IEnumerable<Client>> ListAsync();
 
+    Task<Client> FindIdByAsync(int clientId);
+
     Task<ClientResponse> SaveAsync(Client client);
 
     Task<ClientResponse> UpdateAsync(int clientId, Client client);
