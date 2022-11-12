@@ -23,6 +23,11 @@ public class ClientService : IClientService
         return await _clientRepository.ListAsync();
     }
 
+    public async Task<Client> FindIdByAsync(int clientId)
+    {
+        return await _clientRepository.FindByIdAsync(clientId);
+    }
+
     public async Task<ClientResponse> SaveAsync(Client client)
     {
         //Validate Email
