@@ -37,6 +37,15 @@ public class DeviceRepository : BaseRepository, IDeviceRepository
          .Include(p => p.Client)
          .ToListAsync();
    }
+
+   public async Task<IEnumerable<Device>> FindByUserIdAsync(int userId)
+   {
+      return await _context.Devices
+         .Where(p => p.UserId == userId)
+         .Include(p => p.User)
+         .ToListAsync();
+   }
+
    public void Update(Device device)
    {
       _context.Devices.Update(device);

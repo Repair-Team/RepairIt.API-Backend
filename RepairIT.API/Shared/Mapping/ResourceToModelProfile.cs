@@ -12,5 +12,6 @@ public class ResourceToModelProfile : Profile
         CreateMap<SaveDeviceResource, Device>();
         CreateMap<SaveTechnicianResource, Technician>();
         CreateMap<SaveReportResource, Report>();
+        CreateMap<SaveUserResource, User>();
     }
 }

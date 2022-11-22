@@ -10,5 +10,9 @@ public class Device
 
     public int ClientId { get; set; }
     
+    public int UserId { get; set; }
+
+    public User User { get; set; } = null!;
+    
     public Client Client { get; set; } = null!;
 }

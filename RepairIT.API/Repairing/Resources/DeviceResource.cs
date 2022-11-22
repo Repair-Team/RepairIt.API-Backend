@@ -8,5 +8,5 @@ public class DeviceResource
     public string ImagePath { get; set; }
     public string InventoryStatus { get; set; }
     
-    public int ClientId { get; set; }
+    public int UserId { get; set; }
 }

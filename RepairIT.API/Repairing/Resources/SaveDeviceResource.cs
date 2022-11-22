@@ -20,5 +20,5 @@ public class SaveDeviceResource
     public string InventoryStatus { get; set; } = null!;
 
     [Required]
-    public int ClientId { get; set; }
+    public int UserId { get; set; }
 }

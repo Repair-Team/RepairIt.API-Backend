@@ -17,11 +17,28 @@ public class AppDbContext: DbContext
     public DbSet<Report> Reports { get; set; }
     public DbSet<Technician> Technicians { get; set; }
 
-    
+    public DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         
+        //Users
+        builder.Entity<User>().ToTable("Users");
+        builder.Entity<User>().HasKey(p => p.Id);
+        builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(p => p.FirstName).IsRequired();
+        builder.Entity<User>().Property(p => p.LastName).IsRequired();
+        builder.Entity<User>().Property(p => p.Email).IsRequired();
+        builder.Entity<User>().Property(p => p.Password).IsRequired();
+        builder.Entity<User>().Property(p => p.IsTechnician).IsRequired().HasDefaultValue(false);
+        builder.Entity<User>().Property(p => p.IsPremium).IsRequired().HasDefaultValue(false);
+         
+        
+        //Relationships Client
+        builder.Entity<User>()
+            .HasMany(p => p.Devices)
+            .WithOne(p => p.User)
+            .HasForeignKey(p => p.UserId);
         
         //Technicians
         builder.Entity<Technician>().ToTable("Technicians");
@@ -140,10 +157,10 @@ public class AppDbContext: DbContext
         builder.Entity<Device>()
             .HasData(
         
-            new Device{Id = 1, name = "MyPersonalDevice", description = "For study", imagePath = "https://allmobiles.com.pe/wp-content/uploads/2021/12/Diseno-sin-titulo-18.png", inventoryStatus = "Me", ClientId = 1},
-            new Device{Id = 2, name = "MyPersonalDevice", description = "For study", imagePath = "https://i.pinimg.com/originals/16/6c/d0/166cd0df2080407096c7fa4a25ebe842.png", inventoryStatus = "Me", ClientId = 2},
-            new Device{Id = 3, name = "MyPersonalDevice", description = "For study", imagePath = "https://http2.mlstatic.com/D_NQ_NP_842282-MLA49947859519_052022-O.jpg", inventoryStatus = "Store", ClientId = 3},
-            new Device{Id = 4, name = "MyPersonalDevice", description = "For study", imagePath = "https://img01.huaweifile.com/sg/ms/pe/pms/uomcdn/PE_HW_B2C/pms/202209/gbom/6941487237319/428_428_08FCA2D57166F8D219D7D665F2C69B20mp.png", inventoryStatus = "Repairing", ClientId = 4}
+            new Device{Id = 1, name = "MyPersonalDevice", description = "For study", imagePath = "https://allmobiles.com.pe/wp-content/uploads/2021/12/Diseno-sin-titulo-18.png", inventoryStatus = "Me", UserId = 1},
+            new Device{Id = 2, name = "MyPersonalDevice", description = "For study", imagePath = "https://i.pinimg.com/originals/16/6c/d0/166cd0df2080407096c7fa4a25ebe842.png", inventoryStatus = "Me", UserId = 2},
+            new Device{Id = 3, name = "MyPersonalDevice", description = "For study", imagePath = "https://http2.mlstatic.com/D_NQ_NP_842282-MLA49947859519_052022-O.jpg", inventoryStatus = "Store", UserId = 3},
+            new Device{Id = 4, name = "MyPersonalDevice", description = "For study", imagePath = "https://img01.huaweifile.com/sg/ms/pe/pms/uomcdn/PE_HW_B2C/pms/202209/gbom/6941487237319/428_428_08FCA2D57166F8D219D7D665F2C69B20mp.png", inventoryStatus = "Repairing", UserId = 4}
         );
         
         
@@ -187,5 +204,9 @@ public class AppDbContext: DbContext
                     TechnicianId = 4
                 }
             );
+        
+        
+       
+       
     }
 }

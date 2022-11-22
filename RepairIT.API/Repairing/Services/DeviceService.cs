@@ -36,6 +36,7 @@ public class DeviceService : IDeviceService
         if (existingClient == null)
             return new DeviceResponse("Invalid Client");
         
+        
         try
         {
             await _deviceRepository.AddAsync(device);
@@ -52,10 +53,11 @@ public class DeviceService : IDeviceService
     public async Task<DeviceResponse> UpdateAsync(int deviceId, Device device)
     {
         var existingDevice = await _deviceRepository.FindByIdAsync(deviceId);
-
+        
         if (existingDevice == null)
             return new DeviceResponse("Device not found");
 
+        
         existingDevice.name = device.name;
         existingDevice.description = device.description;
         existingDevice.imagePath = device.imagePath;
@@ -98,6 +100,9 @@ public class DeviceService : IDeviceService
     {
         return await _deviceRepository.FindByClientIdAsync(clientId);
     }
-    
-    
+
+    public async Task<IEnumerable<Device>> ListByUsertIdAsync(int userId)
+    {
+        return await _deviceRepository.FindByUserIdAsync(userId);
+    }
 }
