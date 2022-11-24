@@ -26,18 +26,10 @@ public class DeviceRepository : BaseRepository, IDeviceRepository
    public async Task<Device> FindByIdAsync(int deviceId)
    {
       return await _context.Devices
-         .Include(p=>p.Client)
+         .Include(p=>p.User)
          .FirstOrDefaultAsync(p => p.Id == deviceId);
    }
-
-   public async Task<IEnumerable<Device>> FindByClientIdAsync(int clientId)
-   {
-      return await _context.Devices
-         .Where(p => p.ClientId == clientId)
-         .Include(p => p.Client)
-         .ToListAsync();
-   }
-
+   
    public async Task<IEnumerable<Device>> FindByUserIdAsync(int userId)
    {
       return await _context.Devices

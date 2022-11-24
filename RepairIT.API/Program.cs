@@ -11,11 +11,10 @@ using RepairIT.API.Shared.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddCors();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -37,10 +36,6 @@ builder.Services.AddSwaggerGen(options =>
 //Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseInMemoryDatabase("repairitt");
-});
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseMySQL(connectionString)
         .LogTo(Console.WriteLine, LogLevel.Information)
@@ -53,9 +48,6 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 //Dependency Injections
 
-//Clients
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
-builder.Services.AddScoped<IClientService, ClientService>();
 
 //Technicians
 builder.Services.AddScoped<ITechnicianRepository, TechnicianRepository>();
@@ -75,6 +67,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
+
 //AutoMapper Configuration
 
 builder.Services.AddAutoMapper(
@@ -93,19 +87,17 @@ using (var context = scope.ServiceProvider.GetService<AppDbContext>())
 }
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("v1/swagger.json","v1");
         options.RoutePrefix = "swagger";
     });
-}
 
 app.UseCors(options =>
 {
-    options.WithOrigins("https://repair-it-upc.web.app");
+    options.WithOrigins("https://repair-it-upc.web.app","http://localhost:8080");
     options.AllowAnyHeader();
     options.AllowAnyMethod();
 });

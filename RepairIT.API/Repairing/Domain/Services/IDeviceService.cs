@@ -12,6 +12,6 @@ public interface IDeviceService
     Task<DeviceResponse> UpdateAsync(int deviceId, Device device);
 
     Task<DeviceResponse> DeleteAsync(int deviceId);
-    Task<IEnumerable<Device>> ListByClientIdAsync(int clientId);
-    Task<IEnumerable<Device>> ListByUsertIdAsync(int userId);
+
+    Task<IEnumerable<Device>> ListByUserIdAsync(int userId);
 }

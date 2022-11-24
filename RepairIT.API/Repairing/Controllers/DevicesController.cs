@@ -45,6 +45,9 @@ public class DevicesController : ControllerBase
         OperationId = "PostDevices",
         Tags = new[] { "Devices" }
     )]
+    [ProducesResponseType(typeof(DeviceResource),201)]
+    [ProducesResponseType(typeof(List<string>),400)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SaveDeviceResource resource)
     {
         if (!ModelState.IsValid)

@@ -14,7 +14,6 @@ public interface IDeviceRepository
 
     void Remove(Device device);
 
-    Task<IEnumerable<Device>> FindByClientIdAsync(int clientId);
 
     Task<IEnumerable<Device>> FindByUserIdAsync(int userId);
 }

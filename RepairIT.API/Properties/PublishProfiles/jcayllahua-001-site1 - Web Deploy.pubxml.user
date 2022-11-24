@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <History>False|2022-11-22T21:26:08.9323628Z;False|2022-11-22T16:17:58.3351866-05:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>server=MYSQL5030.site4now.net%3buser=a8ff7c_root%3bpassword=Peru#123%3bDatabase=db_a8ff7c_root</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="RepairIT.API.Shared.Persistence.AppDbContext">
+      <Value>server=MYSQL5030.site4now.net%3buser=a8ff7c_root%3bpassword=Peru#123%3bDatabase=db_a8ff7c_root</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

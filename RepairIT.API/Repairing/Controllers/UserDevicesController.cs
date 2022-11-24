@@ -11,13 +11,12 @@ namespace RepairIT.API.Repairing.Controllers;
 [Route("api/v1/users/{userId}/devices")]
 public class UserDevicesController : ControllerBase
 {
-    private readonly IUserService _userRepository;
+
     private readonly IDeviceService _deviceService;
     private readonly IMapper _mapper;
 
-    public UserDevicesController(IUserService userRepository, IDeviceService deviceService, IMapper mapper)
+    public UserDevicesController(IDeviceService deviceService, IMapper mapper)
     {
-        _userRepository = userRepository;
         _deviceService = deviceService;
         _mapper = mapper;
     }
@@ -30,7 +29,7 @@ public class UserDevicesController : ControllerBase
         Tags = new[] { "Users" })]
     public async Task<IEnumerable<DeviceResource>> GetAllByUserId(int userId)
     {
-        var devices = await _deviceService.ListByClientIdAsync(userId);
+        var devices = await _deviceService.ListByUserIdAsync(userId);
         var resources = _mapper.Map<IEnumerable<Device>, IEnumerable<DeviceResource>>(devices);
 
         return resources;

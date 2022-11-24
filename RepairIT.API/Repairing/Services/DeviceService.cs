@@ -10,30 +10,26 @@ public class DeviceService : IDeviceService
 {
     private readonly IDeviceRepository _deviceRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IClientRepository _clientRepository;
+    private readonly IUserRepository _userRepository;
 
 
-    public DeviceService(IDeviceRepository deviceRepository, IUnitOfWork unitOfWork, IClientRepository clientRepository)
+    public DeviceService(IDeviceRepository deviceRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
     {
         _deviceRepository = deviceRepository;
         _unitOfWork = unitOfWork;
-        _clientRepository = clientRepository;
+        _userRepository = userRepository;
     }
 
     public async Task<IEnumerable<Device>> ListAsync()
     {
         return await _deviceRepository.ListAsync();
     }
-
-    public async Task<Device> FindByIdAsync(int id)
-    {
-        return await _deviceRepository.FindByIdAsync(id);
-    }
+    
     public async Task<DeviceResponse> SaveAsync(Device device)
     {
-        var existingClient = _clientRepository.FindByIdAsync(device.ClientId);
+        var existingUser = _userRepository.FindByIdAsync(device.UserId);
 
-        if (existingClient == null)
+        if (existingUser == null)
             return new DeviceResponse("Invalid Client");
         
         
@@ -57,12 +53,15 @@ public class DeviceService : IDeviceService
         if (existingDevice == null)
             return new DeviceResponse("Device not found");
 
+        var existingUser = _userRepository.FindByIdAsync(device.UserId);
+        if (existingUser == null)
+            return new DeviceResponse("Invalid User");
         
         existingDevice.name = device.name;
         existingDevice.description = device.description;
         existingDevice.imagePath = device.imagePath;
         existingDevice.inventoryStatus = device.inventoryStatus;
-        existingDevice.ClientId = device.ClientId;
+        existingDevice.UserId = device.UserId;
         try
         {
             _deviceRepository.Update(existingDevice);
@@ -95,13 +94,7 @@ public class DeviceService : IDeviceService
             return new DeviceResponse($"An error occurred while deleting device:{e.Message}");
         }
     }
-
-    public async Task<IEnumerable<Device>> ListByClientIdAsync(int clientId)
-    {
-        return await _deviceRepository.FindByClientIdAsync(clientId);
-    }
-
-    public async Task<IEnumerable<Device>> ListByUsertIdAsync(int userId)
+    public async Task<IEnumerable<Device>> ListByUserIdAsync(int userId)
     {
         return await _deviceRepository.FindByUserIdAsync(userId);
     }
